@@ -1,0 +1,59 @@
+<script>
+class enfermedad {
+    constructor(lugar_partida, tipo, contagio, resistencia) {
+        this.lugar_partida = lugar_partida;
+        this.tipo = tipo;
+        this.contagio = contagio;
+        this.resistencia = resistencia;
+    }
+    infectar(){
+
+    }
+    get getContagio() {
+        return this.contagio;
+    }
+    set setContagio(cambioContagio) {
+        this.contagio = cambioContagio;
+    }
+    get getResistencia() {
+        return this.resistencia;
+    }
+    set setResistencia(cambioResistencia) {
+        this.resistencia = cambioResistencia;
+    }
+}
+
+class lugares {
+    constructor(temperatura, porcentaje_zombies, nombre, avance) {
+        this.temperatura = temperatura;
+        this.porcentaje_zombies = porcentaje_zombies;
+        this.nombre = nombre;
+        this.avance = avance;
+    }
+    get getTemperatura() {
+        return this.temperatura;
+    }
+    get getDensidad() {
+        return this.densidad_poblacion;
+    }
+    set setDensidad(nuevoZombies) {
+        this.porcentaje_zombies = porcentaje_zombies;
+    }
+    get getAvance() {
+        return this.avance;
+    }
+    set setAvance(nuevoAvance) {
+        this.avance = nuevoAvance;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+</script>
