@@ -11,5 +11,3 @@ let infectar = (contagio, temperatura) => {
         console.log(infeccion)
     }
 }
-
-infectar(2, 3)
