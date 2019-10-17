@@ -1,7 +1,8 @@
 <script>
 class enfermedad {
-    constructor(contagio) {
+    constructor(contagio,nombre) {
         this.contagio = contagio;
+        this.nombre=nombre;
 
     }
 get GetContagio(){
@@ -9,18 +10,19 @@ get GetContagio(){
 }
 }
 class lugares {
-    constructor(resistencia) {
+    constructor(resistencia,nombre) {
         this.resistencia=resistencia;
+        this.nombre=nombre;
     }
 get GetResistencia(){
     return this.resistencia;
 }
 }
-let bacteria=new enfermedad("Alto");
-let africa=new lugares("Baja");
+let patogeno=new enfermedad("Alto","Bacteria");
+let continente=new lugares("Baja","África");
+let probabilidad = 0;
 function infectar(enfermedad_,lugares_) {
     let vacuna = 1;
-    let probabilidad = 0;
     let probabilidadBaja = 10;
     do {
     if (enfermedad_ === "Alto" && lugares_ === "Baja") {
@@ -36,14 +38,19 @@ function infectar(enfermedad_,lugares_) {
             vacuna *= 1.10
             probabilidadBaja *= vacuna;
         }
-        console.log(randomNum)
         console.log(probabilidadBaja)
     }
     probabilidad = probabilidadBaja;
     }
 while (probabilidad > 1 && probabilidad < 90);
 }
-infectar(bacteria.GetContagio,lugares.GetResistencia);
+if(probabilidad<1){
+    console.log("Ha muerto toda la población de " + continente.nombre);
+}
+else {
+    console.log("La humanidad ha ganado frente a las " + patogeno.nombre);
+}
+infectar(patogeno.GetContagio,continente.GetResistencia);
 
 
 </script>
