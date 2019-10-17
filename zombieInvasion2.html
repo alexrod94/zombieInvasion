@@ -18,13 +18,14 @@ get GetResistencia(){
     return this.resistencia;
 }
 }
-let patogeno=new enfermedad("Alto","Bacteria");
-let continente=new lugares("Baja","África");
+let patogeno=new enfermedad("Baja","Bacteria");
+let continente=new lugares("Alta","África");
 let probabilidad = 0;
 function infectar(enfermedad_,lugares_) {
     let vacuna = 1;
     let probabilidadBaja = 10;
-    do {
+    let probabilidadBajaAlta= 65;
+do {
     if (enfermedad_ === "Alto" && lugares_ === "Baja") {
         let randomNum = Math.floor(Math.random() * 100)
         console.log(randomNum);
@@ -35,23 +36,40 @@ function infectar(enfermedad_,lugares_) {
             probabilidadBaja *= vacuna;
         } else if (!infeccion) {
             console.log("no infectado")
-            vacuna *= 1.10
+            vacuna *= 1.10;
             probabilidadBaja *= vacuna;
         }
         console.log(probabilidadBaja)
     }
     probabilidad = probabilidadBaja;
+    if(enfermedad_==="Baja" && lugares_==="Alta"){
+        let randomNum = Math.floor(Math.random() * 100)
+        console.log(randomNum);
+        let infeccion = randomNum > probabilidadBajaAlta;
+        if (infeccion) {
+            console.log("infectado")
+            vacuna *= 0.90;
+            probabilidadBajaAlta *= vacuna;
+        } else if (!infeccion) {
+            console.log("no infectado")
+            vacuna *= 1.20;
+            probabilidadBajaAlta *= vacuna;
+        }
+        console.log(probabilidadBajaAlta)
     }
+    probabilidad = probabilidadBajaAlta;
+    }
+    
 while (probabilidad > 1 && probabilidad < 90);
 }
 if(probabilidad<1){
     console.log("Ha muerto toda la población de " + continente.nombre);
 }
-else {
+else if(probabilidad>90){
     console.log("La humanidad ha ganado frente a las " + patogeno.nombre);
 }
+
 infectar(patogeno.GetContagio,continente.GetResistencia);
-infectar(bacteria.GetContagio,africa.GetResistencia);
 
 
 </script>
