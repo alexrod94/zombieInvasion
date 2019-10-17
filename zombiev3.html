@@ -17,9 +17,40 @@ get GetResistencia(){
 }
 }
 let choice = (capacidad, resistencia) => {
-    let patogeno = null
-    let continente = null
-if (capacidad === "Bacteria" && resistencia === "Africa") {
+    let patogeno = null;
+    let continente = null;
+    switch(resistencia){
+        case "Africa":
+        continente=new lugares("Baja");
+            if(capacidad==="Bacteria"){
+            patogeno=new enfermedad("Bajo");
+            }
+            else {
+            patogeno=new enfermedad("Alto");
+            }
+        break;
+        case "Asia":
+        continente=new lugares("Media");
+            if(capacidad==="Bacteria"){
+                patogeno=new enfermedad("Bajo");
+            }
+            else{
+                patogeno=new enfermedad("Alto");
+            }
+        break;
+        case "Norteamerica":
+        continente=new lugares("Alta");
+            if(capacidad==="Bacteria") {
+                patogeno=new enfermedad("Bajo");
+            }
+            else {
+                patogeno=new enfermedad("Alto");
+            }
+        }
+    return [patogeno.GetContagio, continente.GetResistencia];
+        
+    }
+/*if (capacidad === "Bacteria" && resistencia === "Africa") {
     patogeno=new enfermedad("Bajo");
     continente=new lugares("Baja");
 } else if (capacidad === "Bacteria" && resistencia === "Asia") {
@@ -37,9 +68,10 @@ if (capacidad === "Bacteria" && resistencia === "Africa") {
 } else if (capacidad === "Virus" && resistencia === "Norteamerica") {
     patogeno=new enfermedad("Alto");
     continente=new lugares("Alta");
-}
-return [patogeno.GetContagio, continente.GetResistencia];
-}
+
+}*/
+
+
 function infectar(enfermedad_,lugares_) {
     let vacuna = 1;
     let probabilidad = 0;
@@ -143,7 +175,6 @@ function infectar(enfermedad_,lugares_) {
             vacuna *= 1.10
             probabilidadBajaAlta *= vacuna;
         }
-        console.log(randomNum)
         console.log(probabilidadBajaAlta)
         probabilidad = probabilidadBajaAlta
     }
