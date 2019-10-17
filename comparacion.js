@@ -1,10 +1,13 @@
 let infectar = (contagio, temperatura) => {
     if (contagio === 2 && temperatura === 3) {
-        probalidad = 90%
+        let probalidad = 25;
+        let infeccion = Math.floor(Math.random() * 100)
+
         if (infeccion === true) {
-            porcentaje_zombies++
+            console.log("infectado")
         } else if (infeccion === false) {
-            baja la probabilidad
+            console.log("no infectado")
         }
+        console.log(infeccion)
     }
 }

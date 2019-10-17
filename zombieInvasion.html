@@ -1,17 +1,24 @@
 <script>
 class enfermedad {
-    constructor(lugar_partida, tipo, contagio, resistencia) {
-        this.lugar_partida = lugar_partida;
-        this.tipo = tipo;
+    constructor(contagio, resistencia) {
         this.contagio = contagio;
         this.resistencia = resistencia;
     }
-    infectar(){
-
+    infectar(parametroProbabilidad1,parametroProbabilidad2){
+    if(probabilidad<10){
+        this.contagio+=parametroProbabilidad;
+        this.resistencia+=parametroProbabilidad;
     }
+    else if(probabilidad>10){
+        this.contagio+=parametroProbabilidad;
+        this.resistencia+=parametroProbabilidad;
+    }
+}
+
+
     get getContagio() {
         return this.contagio;
-    }
+    }     
     set setContagio(cambioContagio) {
         this.contagio = cambioContagio;
     }
@@ -47,7 +54,37 @@ class lugares {
     }
 }
 
+let bacteria= new enfermedad(2,1);
+let vacuna = 1;
+let probabilidad = 0;
+let probabilidadBaja = 10;
+let parametroProbabilidad=0;
+if(probabilidadBaja<10){
+    parametroProbabilidad1=1;
+    parametroProbabilidad2=-1;
+}
+bacteria.infectar();
 
+   /* if (bacteria.contagio === 2 && bacteria.resistencia === 1) {
+        let randomNum = Math.floor(Math.random() * 100)
+        let infeccion = randomNum > probabilidadBaja;
+        if (infeccion) {
+            console.log("infectado")
+            vacuna *= 0.90;
+            probabilidadBaja *= vacuna;
+        } else if (!infeccion) {
+            console.log("no infectado")
+            vacuna *= 1.10
+            probabilidadBaja *= vacuna;
+        }
+        console.log(randomNum)
+        console.log(probabilidadBaja)
+    }
+    probabilidad = probabilidadBaja;*/
+
+
+console.log(bacteria.getContagio);
+console.log(bacteria.getResistencia);
 
 
 
