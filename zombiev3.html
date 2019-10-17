@@ -19,7 +19,6 @@ get GetResistencia(){
 let choice = (capacidad, resistencia) => {
     let patogeno = null
     let continente = null
-
 if (capacidad === "bacteria" && resistencia === "africa") {
     patogeno=new enfermedad("Bajo");
     continente=new lugares("Baja");
@@ -140,17 +139,30 @@ while (probabilidad > 1 && probabilidad < 90);
 if (wakanda) {
     alert("Wakanda ha salvado el día")
 } else {
-if (probabilidad < 1) alert("Toda la humanidad ha sido infectada")
+if (probabilidad < 1) alert(`Lo lograste! Todos los habitantes de ${`)
 else alert("La humanidad ha conseguido detener la infección")
 }
 }
-
-alert("Bienvenido al juego de la invasión zombie")
-let capacidad = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
-let resistencia = prompt("Elige un continente: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
+function comenzar () {
+alert("Bienvenido al juego de la invasión zombie.")
+alert("En este juego, eres un científico loco que quiere convertir a toda la humanidad en muertos vivientes")
+let capacidad = prompt("Para comenzar, elige el tipo de agente que quieres que propague tu enfermedad: \n -Bacteria \n -Virus").toLowerCase();
+//let noBacteria = capacidad === "bacteria"
+//let noVirus = capacidad === "virus"
+//while (!noBacteria && !noVirus) {
+    while (capacidad !== "bacteria" && capacidad !== "virus") {
+        alert("Introduce una opción válida")
+        capacidad = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
+    }
+let resistencia = prompt("Ahora escoge el continente en el que quieres probar la primera versión de tu infección: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
+    while (resistencia !== "africa" && resistencia !== "norteamerica" && resistencia !== "asia") {
+        alert("Introduce una opción válida")
+        resistencia = prompt("Elige un continente: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
+    }
 let choiceResult = choice(capacidad, resistencia)
-let wakanda = false;
 infectar(choiceResult[0], choiceResult[1])
-
+}
+let wakanda = false;
+comenzar()
 </script>
 
