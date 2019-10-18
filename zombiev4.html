@@ -26,13 +26,14 @@ function start () {
 alert("Bienvenido al juego de la invasión zombie.")
 alert("En este juego, eres un científico loco que quiere convertir a toda la humanidad en muertos vivientes")
 let typeOfIllness = prompt("Para comenzar, elige el tipo de agente que quieres que propague tu enfermedad: \n -Bacteria \n -Virus").toLowerCase();
-//let noBacteria = typeOfIllness === "bacteria"
-//let noVirus = typeOfIllness === "virus"
-//while (!noBacteria && !noVirus) {
-    while (typeOfIllness !== "bacteria" && typeOfIllness !== "virus") {
+let noBacteria = typeOfIllness === "bacteria"
+let noVirus = typeOfIllness === "virus"
+while (!noBacteria && !noVirus) {
         alert("Introduce una opción válida")
         typeOfIllness = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
     }
+    console.log(typeOfIllness);
+    
 let resistance = prompt("Ahora escoge el continente en el que quieres probar la primera versión de tu infección: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
     while (resistance !== "africa" && resistance !== "norteamerica" && resistance !== "asia") {
         alert("Introduce una opción válida")
