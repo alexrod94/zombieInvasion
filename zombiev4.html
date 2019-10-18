@@ -1,20 +1,20 @@
 <script>
-class enfermedad {
-    constructor(contagio) {
-        this.contagio = contagio;
+class Illness {
+    constructor(spread) {
+        this.spread = spread;
 
     }
-get GetContagio(){
-    return this.contagio;
+get Getspread(){
+    return this.spread;
 }
 }
-class lugares {
-    constructor(resistencia, name) {
-        this.resistencia=resistencia;
+class Places {
+    constructor(resistance, name) {
+        this.resistance=resistance;
         this.name = name;
     }
-get GetResistencia(){
-    return this.resistencia;
+get Getresistance(){
+    return this.resistance;
 }
 get GetName() {
     return this.name;
@@ -22,164 +22,156 @@ get GetName() {
 }
 let wakanda = false;
 
-function comenzar () {
+function start () {
 alert("Bienvenido al juego de la invasión zombie.")
 alert("En este juego, eres un científico loco que quiere convertir a toda la humanidad en muertos vivientes")
-let capacidad = prompt("Para comenzar, elige el tipo de agente que quieres que propague tu enfermedad: \n -Bacteria \n -Virus").toLowerCase();
-//let noBacteria = capacidad === "bacteria"
-//let noVirus = capacidad === "virus"
+let typeOfIllness = prompt("Para comenzar, elige el tipo de agente que quieres que propague tu enfermedad: \n -Bacteria \n -Virus").toLowerCase();
+//let noBacteria = typeOfIllness === "bacteria"
+//let noVirus = typeOfIllness === "virus"
 //while (!noBacteria && !noVirus) {
-    while (capacidad !== "bacteria" && capacidad !== "virus") {
+    while (typeOfIllness !== "bacteria" && typeOfIllness !== "virus") {
         alert("Introduce una opción válida")
-        capacidad = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
+        typeOfIllness = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
     }
-let resistencia = prompt("Ahora escoge el continente en el que quieres probar la primera versión de tu infección: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
-    while (resistencia !== "africa" && resistencia !== "norteamerica" && resistencia !== "asia") {
+let resistance = prompt("Ahora escoge el continente en el que quieres probar la primera versión de tu infección: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
+    while (resistance !== "africa" && resistance !== "norteamerica" && resistance !== "asia") {
         alert("Introduce una opción válida")
-        resistencia = prompt("Elige un continente: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
+        resistance = prompt("Elige un continente: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
     }
-choice(capacidad, resistencia)
+choice(typeOfIllness, resistance)
 }
 
 
-let choice = (capacidad, resistencia) => {
-    let patogeno = null
-    let continente = null
-    switch(resistencia) {
+let choice = (typeOfIllness, resistance) => {
+    let pathogen = null
+    let continent = null
+    switch(resistance) {
         case "africa":
-        continente = new lugares("Baja", "África");
-        if (capacidad === "bacteria") {
-            patogeno = new enfermedad("Bajo")
-        } else {
-            patogeno = new enfermedad("Alto")
-        }
+        continent = new Places("Baja", "África");
         break;
         case "asia":
-        continente = new lugares("Media", "Asia");
-        if (capacidad === "bacteria") {
-            patogeno = new enfermedad("Bajo")
-        } else {
-            patogeno = new enfermedad("Alto")
-        }
+        continent = new Places("Media", "Asia");
         break;
         case "norteamerica":
-        continente = new lugares("Alta", "Norteamérica");
-        if (capacidad === "bacteria") {
-            patogeno = new enfermedad("Bajo")
-        } else {
-            patogeno = new enfermedad("Alto")
-        }
+        continent = new Places("Alta", "Norteamérica");
         break;
     }
-    infectar(patogeno, continente)
+    if(typeOfIllness==="bacteria"){
+        pathogen = new Illness("Bajo")
+    }
+    else {
+        pathogen = new Illness("Alto")
+
+    }
+    infect(pathogen, continent)
 }
 
 
-function infectar(enfermedad_,lugares_) {
-    let vacuna = 1;
-    let probabilidad = 0;
-    let probabilidadAltaBaja = 15;
-    let probabilidadAltaAlta = 60;
-    let probabilidadAltaMedia = 30;
-    let probabilidadBajaBaja = 45;
-    let probabilidadBajaMedia = 70;
-    let probabilidadBajaAlta = 80;
+function infect(Illness_,Places_) {
+    let vaccine = 1;
+    let probability = 0;
+    let probabilityAltaBaja = 15;
+    let probabilityAltaAlta = 60;
+    let probabilityAltaMedia = 30;
+    let probabilityBajaBaja = 45;
+    let probabilityBajaMedia = 70;
+    let probabilityBajaAlta = 80;
     do {
-    if (enfermedad_.GetContagio === "Alto" && lugares_.GetResistencia === "Baja") {
+    if (Illness_.Getspread === "Alto" && Places_.Getresistance === "Baja") {
         let randomNum = Math.floor(Math.random() * 100)
-        let infeccion = randomNum > probabilidadAltaBaja;
-        if (infeccion) {
+        let infection = randomNum > probabilityAltaBaja;
+        if (infection) {
             alert("La infección está avanzando")
-            vacuna *= 0.90;
-            probabilidadAltaBaja *= vacuna;
-        } else if (!infeccion) {
+            vaccine *= 0.90;
+            probabilityAltaBaja *= vaccine;
+        } else {
             alert("La humanidad está ganando terreno")
-            vacuna *= 1.10
-            probabilidadAltaBaja *= vacuna;
+            vaccine *= 1.10
+            probabilityAltaBaja *= vaccine;
         }
             if (randomNum > 56 && randomNum < 60) {
                 alert("Cuando todo parecía perdido, Wakanda acabó con la infección");
                 wakanda = true;
                 break;
             }
-        probabilidad = probabilidadAltaBaja
-    }   else if (enfermedad_.GetContagio === "Alto" && lugares_.GetResistencia === "Alta") {
+        probability = probabilityAltaBaja
+    }   else if (Illness_.Getspread === "Alto" && Places_.Getresistance === "Alta") {
         let randomNum = Math.floor(Math.random() * 100)
-        let infeccion = randomNum > probabilidadAltaAlta;
-        if (infeccion) {
+        let infection = randomNum > probabilityAltaAlta;
+        if (infection) {
             alert("La infección está avanzando")
-            vacuna *= 0.90;
-            probabilidadAltaAlta *= vacuna;
-        } else if (!infeccion) {
+            vaccine *= 0.90;
+            probabilityAltaAlta *= vaccine;
+        } else  {
             alert("La humanidad está ganando terreno")
-            vacuna *= 1.10
-            probabilidadAltaAlta *= vacuna;
+            vaccine *= 1.10
+            probabilityAltaAlta *= vaccine;
         }
-        probabilidad = probabilidadAltaAlta
-    } else if (enfermedad_.GetContagio === "Alto" && lugares_.GetResistencia === "Media") {
+        probability = probabilityAltaAlta
+    } else if (Illness_.Getspread === "Alto" && Places_.Getresistance === "Media") {
         let randomNum = Math.floor(Math.random() * 100)
-        let infeccion = randomNum > probabilidadAltaMedia;
-        if (infeccion) {
+        let infection = randomNum > probabilityAltaMedia;
+        if (infection) {
             alert("La infección está avanzando")
-            vacuna *= 0.90;
-            probabilidadAltaMedia *= vacuna;
-        } else if (!infeccion) {
+            vaccine *= 0.90;
+            probabilityAltaMedia *= vaccine;
+        } else {
             alert("La humanidad está ganando terreno")
-            vacuna *= 1.10
-            probabilidadAltaMedia *= vacuna;
+            vaccine *= 1.10
+            probabilityAltaMedia *= vaccine;
         }
-        probabilidad = probabilidadAltaMedia
-    } else if (enfermedad_.GetContagio === "Bajo" && lugares_.GetResistencia === "Baja") {
+        probability = probabilityAltaMedia
+    } else if (Illness_.Getspread === "Bajo" && Places_.Getresistance === "Baja") {
         let randomNum = Math.floor(Math.random() * 100)
-        let infeccion = randomNum > probabilidadBajaBaja;
-        if (infeccion) {
+        let infection = randomNum > probabilityBajaBaja;
+        if (infection) {
             alert("La infección está avanzando")
-            vacuna *= 0.90;
-            probabilidadBajaBaja *= vacuna;
-        } else if (!infeccion) {
+            vaccine *= 0.90;
+            probabilityBajaBaja *= vaccine;
+        } else  {
             alert("La humanidad está ganando terreno")
-            vacuna *= 1.10
-            probabilidadBajaBaja *= vacuna;
+            vaccine *= 1.10
+            probabilityBajaBaja *= vaccine;
         }
-        probabilidad = probabilidadBajaBaja
-    } else if (enfermedad_.GetContagio === "Bajo" && lugares_.GetResistencia === "Media") {
+        probability = probabilityBajaBaja
+    } else if (Illness_.Getspread === "Bajo" && Places_.Getresistance === "Media") {
         let randomNum = Math.floor(Math.random() * 100)
-        let infeccion = randomNum > probabilidadBajaMedia;
-        if (infeccion) {
+        let infection = randomNum > probabilityBajaMedia;
+        if (infection) {
             alert("La infección está avanzando")
-            vacuna *= 0.90;
-            probabilidadBajaMedia *= vacuna;
-        } else if (!infeccion) {
+            vaccine *= 0.90;
+            probabilityBajaMedia *= vaccine;
+        } else  {
             alert("La humanidad está ganando terreno")
-            vacuna *= 1.10
-            probabilidadBajaMedia *= vacuna;
+            vaccine *= 1.10
+            probabilityBajaMedia *= vaccine;
         }
-        probabilidad = probabilidadBajaMedia
-    } else if (enfermedad_.GetContagio === "Bajo" && lugares_.GetResistencia === "Alta") {
+        probability = probabilityBajaMedia
+    } else if (Illness_.Getspread === "Bajo" && Places_.Getresistance === "Alta") {
         let randomNum = Math.floor(Math.random() * 100)
-        let infeccion = randomNum > probabilidadBajaAlta;
-        if (infeccion) {
+        let infection = randomNum > probabilityBajaAlta;
+        if (infection) {
             alert("La infección está avanzando")
-            vacuna *= 0.90;
-            probabilidadBajaAlta *= vacuna;
-        } else if (!infeccion) {
+            vaccine *= 0.90;
+            probabilityBajaAlta *= vaccine;
+        } else  {
             alert("La humanidad está ganando terreno")
-            vacuna *= 1.10
-            probabilidadBajaAlta *= vacuna;
+            vaccine *= 1.10
+            probabilityBajaAlta *= vaccine;
         }
-        probabilidad = probabilidadBajaAlta
+        probability = probabilityBajaAlta
     }
-    } while (probabilidad > 1 && probabilidad < 90);
+    } while (probability > 1 && probability < 90);
 if (wakanda) {
     alert("Wakanda ha salvado el día")
 } else {
-    //sconsole.log(lugares_)
-if (probabilidad < 1) alert(`¡Lo lograste! Todos los habitantes de ${lugares_.GetName} han sido infectados`)
-else alert(`¡Has fallado! Los habitantes de ${lugares_.GetName} han conseguido detener la infección`)
+    //sconsole.log(Places_)
+if (probability < 1) alert(`¡Lo lograste! Todos los habitantes de ${Places_.GetName} han sido infectados`)
+else alert(`¡Has fallado! Los habitantes de ${Places_.GetName} han conseguido detener la infección`)
 }
 }
 
 
-comenzar()
+start()
 </script>
 
