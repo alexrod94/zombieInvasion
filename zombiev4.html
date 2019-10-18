@@ -21,58 +21,64 @@ get GetName() {
 }
 }
 let wakanda = false;
-
+let parametros=[];
+let contadorPropiedades=0;
 function start () {
 alert("Bienvenido al juego de la invasión zombie.")
 alert("En este juego, eres un científico loco que quiere convertir a toda la humanidad en muertos vivientes")
 let typeOfIllness = prompt("Para comenzar, elige el tipo de agente que quieres que propague tu enfermedad: \n -Bacteria \n -Virus").toLowerCase();
 let NoPathogenBacteria = true;
 let noPathogenVirus = true;
-  while (NoPathogenBacteria && noPathogenVirus) {
+  /*while (NoPathogenBacteria && noPathogenVirus) {
       alert("Introduce una opción válida")
       typeOfIllness = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
       NoPathogenBacteria = typeOfIllness !== "bacteria"
       noPathogenVirus = typeOfIllness !== "virus"
-  }
+  }*/
+parametros[contadorPropiedades]=typeOfIllness;
+contadorPropiedades ++;
 let resistance = prompt("Ahora escoge el continente en el que quieres probar la primera versión de tu infección: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
 let NoContinentAfrica =true;
 let NoContinentAsia =true;
 let NoContinentNorteamerica =true;
-    while (NoContinentAfrica && NoContinentAsia && NoContinentNorteamerica) {
+    /*while (NoContinentAfrica && NoContinentAsia && NoContinentNorteamerica) {
         alert("Introduce una opción válida")
         resistance = prompt("Elige un continente: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
         NoContinentAfrica = resistance !== "africa";
         NoContinentAsia = resistance !== "asia";
         NoContinentNorteamerica = resistance !== "norteamerica";
-    }
-    choice(typeOfIllness, resistance)
-}
+    }*/
+parametros[contadorPropiedades]=resistance;
+return parametros;
+   }
 
-function choice (typeOfIllness, resistance) {
+function choice (parametros) {
     let pathogen = null
     let continent = null
-    switch(resistance) {
+    switch(parametros[1]) {
         case "africa":
         continent = new Places("Baja", "África");
         break;
         case "asia":
         continent = new Places("Media", "Asia");
+
         break;
         case "norteamerica":
         continent = new Places("Alta", "Norteamérica");
+
         break;
     }
-    if(typeOfIllness==="bacteria"){
+    if(parametros[0]==="bacteria"){
         pathogen = new Illness("Bajo")
     }
     else {
         pathogen = new Illness("Alto")
 
     }
-    infect(pathogen, continent)
+
+    return [pathogen,continent];
+
 }
-
-
 function infect(Illness_,Places_) {
     let vaccine = 1;
     let probability = 0;
@@ -176,8 +182,15 @@ if (probability < 1) alert(`¡Lo lograste! Todos los habitantes de ${Places_.Get
 else alert(`¡Has fallado! Los habitantes de ${Places_.GetName} han conseguido detener la infección`)
 }
 }
+start();
+choice(parametros);
+infect([pathogen.Getspread,continent.Getresistance]);
 
 
-start()
+
+
+
+
+
 </script>
 
