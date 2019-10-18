@@ -23,27 +23,32 @@ get GetName() {
 let wakanda = false;
 
 function start () {
-alert("Bienvenido al juego de la invasión zombie.")
-alert("En este juego, eres un científico loco que quiere convertir a toda la humanidad en muertos vivientes")
+alert("Bienvenido al juego de la invasión zombie.");
+alert("En este juego, eres un científico loco que quiere convertir a toda la humanidad en muertos vivientes");
 let typeOfIllness = prompt("Para comenzar, elige el tipo de agente que quieres que propague tu enfermedad: \n -Bacteria \n -Virus").toLowerCase();
-let noBacteria = typeOfIllness === "bacteria"
-let noVirus = typeOfIllness === "virus"
-while (!noBacteria && !noVirus) {
-        alert("Introduce una opción válida")
-        typeOfIllness = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
-    }
-    console.log(typeOfIllness);
-    
+let NoPathogenBacteria = typeOfIllness !== "bacteria";
+let noPathogenVirus =typeOfIllness !== "virus";
+  while (NoPathogenBacteria && noPathogenVirus) {
+      alert("Introduce una opción válida");
+      typeOfIllness = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
+      NoPathogenBacteria = typeOfIllness !== "bacteria";
+      noPathogenVirus = typeOfIllness !== "virus";
+  }
 let resistance = prompt("Ahora escoge el continente en el que quieres probar la primera versión de tu infección: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
-    while (resistance !== "africa" && resistance !== "norteamerica" && resistance !== "asia") {
-        alert("Introduce una opción válida")
+let NoContinentAfrica = resistance !=="africa";
+let NoContinentAsia = resistance !=="asia";
+let NoContinentNorteamerica = resistance !=="norteamerica";
+    while (NoContinentAfrica && NoContinentAsia && NoContinentNorteamerica) {
+        alert("Introduce una opción válida");
         resistance = prompt("Elige un continente: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
+        NoContinentAfrica = resistance !== "africa";
+        NoContinentAsia = resistance !== "asia";
+        NoContinentNorteamerica = resistance !== "norteamerica";
     }
-choice(typeOfIllness, resistance)
+    choice(typeOfIllness, resistance)
 }
 
-
-let choice = (typeOfIllness, resistance) => {
+function choice (typeOfIllness, resistance) {
     let pathogen = null
     let continent = null
     switch(resistance) {
