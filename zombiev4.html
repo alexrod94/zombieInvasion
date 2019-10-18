@@ -24,34 +24,33 @@ let wakanda = false;
 let parametros=[];
 let contadorPropiedades=0;
 function start () {
-alert("Bienvenido al juego de la invasión zombie.")
-alert("En este juego, eres un científico loco que quiere convertir a toda la humanidad en muertos vivientes")
+alert("Bienvenido al juego de la invasión zombie.");
+alert("En este juego, eres un científico loco que quiere convertir a toda la humanidad en muertos vivientes");
 let typeOfIllness = prompt("Para comenzar, elige el tipo de agente que quieres que propague tu enfermedad: \n -Bacteria \n -Virus").toLowerCase();
-let NoPathogenBacteria = true;
-let noPathogenVirus = true;
-  /*while (NoPathogenBacteria && noPathogenVirus) {
-      alert("Introduce una opción válida")
+let NoPathogenBacteria = typeOfIllness !== "bacteria";
+let noPathogenVirus =typeOfIllness !== "virus";
+  while (NoPathogenBacteria && noPathogenVirus) {
+      alert("Introduce una opción válida");
       typeOfIllness = prompt("Introduce tipo de enfermedad: \n -Bacteria \n -Virus").toLowerCase();
-      NoPathogenBacteria = typeOfIllness !== "bacteria"
-      noPathogenVirus = typeOfIllness !== "virus"
-  }*/
+      NoPathogenBacteria = typeOfIllness !== "bacteria";
+      noPathogenVirus = typeOfIllness !== "virus";
+  }
 parametros[contadorPropiedades]=typeOfIllness;
-contadorPropiedades ++;
+contadorPropiedades++;
 let resistance = prompt("Ahora escoge el continente en el que quieres probar la primera versión de tu infección: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
-let NoContinentAfrica =true;
-let NoContinentAsia =true;
-let NoContinentNorteamerica =true;
-    /*while (NoContinentAfrica && NoContinentAsia && NoContinentNorteamerica) {
-        alert("Introduce una opción válida")
+let NoContinentAfrica = resistance !=="africa";
+let NoContinentAsia = resistance !=="asia";
+let NoContinentNorteamerica = resistance !=="norteamerica";
+    while (NoContinentAfrica && NoContinentAsia && NoContinentNorteamerica) {
+        alert("Introduce una opción válida");
         resistance = prompt("Elige un continente: \n -Africa \n -Norteamerica \n -Asia").toLowerCase();
         NoContinentAfrica = resistance !== "africa";
         NoContinentAsia = resistance !== "asia";
         NoContinentNorteamerica = resistance !== "norteamerica";
-    }*/
+    }
 parametros[contadorPropiedades]=resistance;
 return parametros;
    }
-
 function choice (parametros) {
     let pathogen = null
     let continent = null
@@ -76,10 +75,11 @@ function choice (parametros) {
 
     }
 
-    return [pathogen,continent];
+    return [pathogen, continent];
 
 }
-function infect(Illness_,Places_) {
+
+function infect(gameElements) {
     let vaccine = 1;
     let probability = 0;
     let probabilityAltaBaja = 15;
@@ -89,7 +89,7 @@ function infect(Illness_,Places_) {
     let probabilityBajaMedia = 70;
     let probabilityBajaAlta = 80;
     do {
-    if (Illness_.Getspread === "Alto" && Places_.Getresistance === "Baja") {
+    if (gameElements[0].Getspread === "Alto" && gameElements[1].Getresistance === "Baja") {
         let randomNum = Math.floor(Math.random() * 100)
         let infection = randomNum > probabilityAltaBaja;
         if (infection) {
@@ -107,7 +107,7 @@ function infect(Illness_,Places_) {
                 break;
             }
         probability = probabilityAltaBaja
-    }   else if (Illness_.Getspread === "Alto" && Places_.Getresistance === "Alta") {
+    }   else if (gameElements[0].Getspread === "Alto" && gameElements[1].Getresistance === "Alta") {
         let randomNum = Math.floor(Math.random() * 100)
         let infection = randomNum > probabilityAltaAlta;
         if (infection) {
@@ -120,7 +120,7 @@ function infect(Illness_,Places_) {
             probabilityAltaAlta *= vaccine;
         }
         probability = probabilityAltaAlta
-    } else if (Illness_.Getspread === "Alto" && Places_.Getresistance === "Media") {
+    } else if (gameElements[0].Getspread === "Alto" && gameElements[1].Getresistance === "Media") {
         let randomNum = Math.floor(Math.random() * 100)
         let infection = randomNum > probabilityAltaMedia;
         if (infection) {
@@ -133,7 +133,7 @@ function infect(Illness_,Places_) {
             probabilityAltaMedia *= vaccine;
         }
         probability = probabilityAltaMedia
-    } else if (Illness_.Getspread === "Bajo" && Places_.Getresistance === "Baja") {
+    } else if (gameElements[0].Getspread === "Bajo" && gameElements[1].Getresistance === "Baja") {
         let randomNum = Math.floor(Math.random() * 100)
         let infection = randomNum > probabilityBajaBaja;
         if (infection) {
@@ -146,7 +146,7 @@ function infect(Illness_,Places_) {
             probabilityBajaBaja *= vaccine;
         }
         probability = probabilityBajaBaja
-    } else if (Illness_.Getspread === "Bajo" && Places_.Getresistance === "Media") {
+    } else if (gameElements[0].Getspread === "Bajo" && gameElements[1].Getresistance === "Media") {
         let randomNum = Math.floor(Math.random() * 100)
         let infection = randomNum > probabilityBajaMedia;
         if (infection) {
@@ -159,7 +159,7 @@ function infect(Illness_,Places_) {
             probabilityBajaMedia *= vaccine;
         }
         probability = probabilityBajaMedia
-    } else if (Illness_.Getspread === "Bajo" && Places_.Getresistance === "Alta") {
+    } else if (gameElements[0].Getspread === "Bajo" && gameElements[1].Getresistance === "Alta") {
         let randomNum = Math.floor(Math.random() * 100)
         let infection = randomNum > probabilityBajaAlta;
         if (infection) {
@@ -178,13 +178,15 @@ if (wakanda) {
     alert("Wakanda ha salvado el día")
 } else {
     //sconsole.log(Places_)
-if (probability < 1) alert(`¡Lo lograste! Todos los habitantes de ${Places_.GetName} han sido infectados`)
-else alert(`¡Has fallado! Los habitantes de ${Places_.GetName} han conseguido detener la infección`)
+if (probability < 1) alert(`¡Lo lograste! Todos los habitantes de ${gameElements[1].GetName} han sido infectados`)
+else alert(`¡Has fallado! Los habitantes de ${gameElements[1].GetName} han conseguido detener la infección`)
 }
 }
 start();
 choice(parametros);
-infect([pathogen.Getspread,continent.Getresistance]);
+let gameElements = choice(parametros);
+infect(gameElements);
+
 
 
 
